@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Player</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .video-container {
+            position: relative;
+            width: 640px;
+            height: 360px;
+        }
+        .controls {
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        .controls button {
+            padding: 10px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        .controls button:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="video-container">
+        <video id="videoPlayer" width="640" height="360" controls>
+            <source src="" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="controls">
+            <button id="playPause">Play</button>
+            <button id="stop">Stop</button>
+        </div>
+    </div>
+
+    <script>
+        const videoPlayer = document.getElementById('videoPlayer');
+        const playPauseButton = document.getElementById('playPause');
+        const stopButton = document.getElementById('stop');
+
+        playPauseButton.addEventListener('click', () => {
+            if (videoPlayer.paused || videoPlayer.ended) {
+                videoPlayer.play();
+                playPauseButton.textContent = 'Pause';
+            } else {
+                videoPlayer.pause();
+                playPauseButton.textContent = 'Play';
+            }
+        });
+
+        stopButton.addEventListener('click', () => {
+            videoPlayer.pause();
+            videoPlayer.currentTime = 0;
+            playPauseButton.textContent = 'Play';
+        });
+
+        videoPlayer.addEventListener('ended', () => {
+            playPauseButton.textContent = 'Play';
+        });
+    </script>
+</body>
+</html>
